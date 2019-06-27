@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>CheckOut</title>
+    <meta charset="utf-8"/>
+</head>
+{% extends 'forkilla/base.html' %}
+{% block content %}
+    <h1>Reserva</h1>
+    <a href="{% url 'index' %}">
+        <button class="btn btn-primary">Vuelve</button>
+    </a>
+    <section>
+    {% if result == "OK" %}
+        <h3><b>Reserva:</b> {{ result }}</h3>
+    {% else %}
+        <h3><b>Error:</b> {{ result }}</h3>
+    {% endif %}
+{% endblock %}
+</section>
+</body>

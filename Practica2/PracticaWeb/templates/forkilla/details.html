@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% extends 'forkilla/base.html' %}
+<html lang="es">
+<head>
+    <title>Details</title>
+    <meta charset="utf-8"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+{% block content %}
+    <body>
+    {% if restaurant %}
+        <li><a href="{% url 'index' %}forkilla">forkilla</a>/<a
+                href="{% url 'restaurants' restaurant.city %}">{{ restaurant.city }}</a>/<a
+                href="{% url 'restaurants' restaurant.city restaurant.category %}">{{ restaurant.category }}</a>/{{ restaurant.name }}
+        </li>
+    {% endif %}
+
+
+    <h1>Benvingut a Forkilla</h1>
+    <div class="container">
+
+        <div class="row col-lg-auto">
+            <div class="col-sm-4">
+                <section>
+                    <article>
+                        <h2>Restaurant:</h2>
+                        <ul>
+                            <h3>
+                                <p>{{ "Name" }} : {{ name }}</p>
+                                <p>{{ "Menu Description" }} : {{ menu_description }}</p>
+                                <p>{{ "Price" }} : {{ price_average }}</p>
+                                <p>{{ "Promoted" }} : {{ is_promot }}</p>
+                                <p>{{ "Rate" }} : {{ rate }}</p>
+                                <p>{{ "Address" }} : {{ address }}</p>
+                                <p>{{ "City" }} : {{ city }}</p>
+                                <p>{{ "Country" }} : {{ country }}</p>
+                                {% load static %}
+                                <p>{{ "Photo" }} :<img src="{% static featured_photo %}"></p>
+                                <p>{{ "Category" }} : {{ category }}</p>
+                            </h3>
+                        </ul>
+                    </article>
+                </section>
+            </div>
+            <div class="col-sm-6">
+                <h2>Review:</h2>
+                {% for review in reviews %}
+                    <h3>
+                        <p>{{ review.user}} : {{ review.comment }} {{ review.value_stars }}</p>
+                    </h3>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% if request.user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-auto">
+                <a href="{% url 'review' restaurant_number %}">
+                    <button class="btn btn-primary">Review</button>
+                </a>
+            </div>
+            <div class="col-md-auto">
+                <form action="{% url 'reservation' %}" method="GET">
+                    <button class="btn btn-primary" type="submit" name="reservation"
+                            value={{ restaurant_number }}>
+                        Reserva
+                    </button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <a href="{% url 'login' %}">
+            <button class="btn btn-primary">Review</button>
+        </a>
+        <a href="{% url 'login' %}">
+            <button class="btn btn-primary">Reserva</button>
+        </a>
+    {% endif %}
+
+    </body>
+
+{% endblock %}
+</ul>
+</article>
+</section>
+</html>

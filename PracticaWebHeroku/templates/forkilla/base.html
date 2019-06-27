@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/png" href="{% static '/images/favicon.ico' %}"/>
+    <style>
+        h1 {
+            font-family: Copperplate;
+        }
+    </style>
+
+    <title>FORKILLA</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/business-frontpage.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Forkilla</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <form action="{% url 'restaurants' %}" method="GET">
+            <h3 style="color: white;padding-left:50px; font-size:20px">City: <input type="text" name="city" value="">
+            </h3>
+        </form>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}">
+                            <button>logout</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'reservationlist' %}">
+                            <button style="padding-left: 10px;">Mis Reservas</button>
+                        </a>
+                    </li>
+
+                    <li><h3 style="color:white; padding-left: 10px;">{{ request.user }}</h3></li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}">
+                            <button>login</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'register' %}">
+                            <button style="padding-left: 10px;">Sign Up</button>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Header -->
+<header class="bg-primary py-5 mb-5">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-lg-12">
+                <h1 class="display-4 text-white mt-5 mb-2">Find the best Restaurants in Spain</h1>
+                <p class="lead mb-5 text-white-50">All kind of restaurants with the lowest prices</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-8 mb-5">
+            <h2>Comparator</h2>
+            <hr>
+            <p>Try yourself!</p>
+            <a class="btn btn-primary btn-lg" href="{% url 'comparator' %}">Call to Comparator &raquo;</a>
+        </div>
+        <div class="col-md-4 mb-5">
+            <h2>Contact Us</h2>
+            <hr>
+            <address>
+                <strong>Johnny</strong>
+                <br>UB
+                <br>
+                <a href="mailto:#">jnunezca11@alumnes.ub.edu</a>
+                <br>
+            </address>
+            <address>
+                <strong>Lukaz</strong>
+                <br>UB
+                <br>
+                <a href="mailto:#">ldoehndo17@alumnes.ub.edu</a>
+                <br>
+            </address>
+        </div>
+    </div>
+    <!-- /.row -->
+    {% block content %}
+    {% endblock content %}
+    <!-- /.row -->
+
+    <section>
+        Your last viewed Restaurants <br>
+
+        {% if request.user.is_authenticated %}
+            <form action="{% url 'reservation' %}" method="get">
+                {% for restaurant in viewedrestaurants.restaurantinsertdate_set.all|slice:"5" %}
+                    <a href="{% url 'detail' restaurant.restaurant.restaurant_number %}">    {{ restaurant.restaurant.name }} </a>
+                    ({{ restaurant.restaurant.rate }}) :    {{ restaurant.restaurant.menu_description }}
+
+                    <button class="btn btn-secondary" type="submit" name="reservation" value={{ restaurant.restaurant.restaurant_number }}>
+                        Reserva
+                    </button>
+                    <br>
+                {% endfor %}
+            </form>
+        {% else %}
+            {% for restaurant in viewedrestaurants.restaurantinsertdate_set.all|slice:"5" %}
+                <a href="{% url 'detail' restaurant.restaurant.restaurant_number %}">    {{ restaurant.restaurant.name }} </a>
+                ({{ restaurant.restaurant.rate }}) :    {{ restaurant.restaurant.menu_description }}
+                <a href="{% url 'login' %}">
+                    <button class="btn btn-primary">Reserva</button>
+                </a>
+                <br>
+            {% endfor %}
+        {% endif %}
+    </section>
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Software Distribuit</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

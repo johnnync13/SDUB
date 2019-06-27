@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparator</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+
+    function compare(ips) {
+        $("#output").html("");
+        var output = "";
+        var parameters = new Map();
+        var category = $("#category").val();
+        console.log(category)
+        var city = $("#city").val();
+        var price = $("#price_average").val();
+
+
+        if (category != 0) {
+            parameters.set('category', category);
+        } else {
+            parameters.set('category', "");
+        }
+        if (city != 0) {
+            parameters.set('city', city);
+        } else {
+            parameters.set('city', "");
+        }
+        if (price != "") {
+            parameters.set('price', price);
+        } else {
+            parameters.set('price', "");
+        }
+
+
+        var dir = "";
+        var j = 0;
+        for (var [clave, valor] of parameters) {
+            if (j == 0) {
+                dir += "?" + clave + "=" + valor;
+            } else {
+                dir += "&" + clave + "=" + valor;
+            }
+            j++;
+        }
+
+        for (let i = 0; i < ips.length; i++) {
+            $.ajax({
+
+                url: "https://" + ips[i] + '/api/restaurants/' + dir, //":8000/api/restaurants"
+                type: 'GET',
+                dataType: 'json',
+
+                success: function (data) {
+                    console.log(data.results)
+                    output += "Requested URL: " + this.url + "<br>";
+                    output += '<pre id="json">';
+                    data['results'].sort(function (a, b) {
+                        return parseFloat(b.price_average) - parseFloat(a.price_average);
+                    });
+                    output += JSON.stringify(data['results'], undefined, 2);
+                    output += "</pre>";
+                    $("#output").append(output + "<hr>");
+
+                },
+
+                complete: function (xhr, status) {
+                    output = "";
+                },
+
+                error: function (xhr, status, errorThrown) {
+                    alert("Sorry, there was a problem!");
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    console.dir(xhr);
+                },
+
+            });
+
+        }
+
+    }
+</script>
+<script>
+    function comparator(ips) {
+        var city = document.getElementById("city").value;
+        var price = document.getElementById("price").value;
+        var category = document.getElementById("category").value;
+
+        for (let i = 0; i < ips.length; i++) {
+            var urls = "https://" + ips[i] + ":8000/api/restaurants";
+            urls += "/?category=" + category + "\&city=" + city + "\&price=" + price;
+
+            fetch(urls)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJson) {
+                    var result = document.getElementsByClassName("result");
+                    var restaurants = myJson.results;
+                    for (var i = 0; i < restaurants.length; i++) {
+                        $("<h2>").text(JSON.stringify("Restaurant: ")).appendTo("body");
+                        $("<h3>").text(JSON.stringify(restaurants[i].name)).appendTo("body");
+                        $("<h2>").text(JSON.stringify("City: ")).appendTo("body");
+                        $("<h3>").text(JSON.stringify(restaurants[i].city)).appendTo("body");
+                        $("<h2>").text(JSON.stringify("Category: ")).appendTo("body");
+                        $("<h3>").text(JSON.stringify(restaurants[i].category)).appendTo("body");
+                        $("<h2>").text(JSON.stringify("Price: ")).appendTo("body");
+                        $("<h3>").text(JSON.stringify(restaurants[i].price_average)).appendTo("body");
+                    }
+                    console.log(myJson);
+                });
+        }
+    }
+</script>
+
+
+<script>
+    function get_list_City() {
+        var listaA;
+        listaA = document.getElementById("city");
+        var listaAux = [];
+        fetch('/api/restaurants')
+            .then(res => res.json())
+            .then(data => {
+                for (var i = 0; i < data.results.length; i++) {
+                    option = document.createElement("option")
+                    option.text = data.results[i].city.toString()
+                    if (!listaAux.includes(option.text)) {
+                        listaAux.push(option.text)
+                        listaA.appendChild(option)
+                    }
+
+                }
+            })
+    }
+</script>
+
+<script>
+    function get_list_Category() {
+        lista = document.getElementById("category");
+        var listaAux = [];
+        fetch('/api/restaurants')
+            .then(res => res.json())
+            .then(data => {
+                for (var i = 0; i < data.results.length; i++) {
+                    optionc = document.createElement("option")
+                    optionc.text = data.results[i].category.toString()
+                    if (!listaAux.includes(optionc.text)) {
+                        listaAux.push(optionc.text)
+                        lista.appendChild(optionc)
+                    }
+
+                }
+            })
+    }
+</script>
+
+<script>
+    function load() {
+        get_list_City();
+        get_list_Category();
+    }
+</script>
+{% extends 'forkilla/base.html' %}
+{% block content %}
+    <body>
+    <div class=" container">
+        <div class="h3" id="contenido">
+
+        </div>
+    </div>
+    </body>
+
+    <div class="">
+        <body onload="load()">
+        <select name="city" id="city">
+            <option selected value="0"> Elige una ciudad</option>
+        </select>
+        <select name="category" id="category">
+            <option selected value="0"> Elige una Categoria</option>
+        </select>
+        <br></br>
+        <br></br>
+        </body>
+
+
+        <input type="IntegerField" class="form-control" name="price_average" id="price_average" placeholder="Max Price"><br>
+        <hr>
+        <button class="btn btn-primary btn-lg" onclick="compare({{ ips }})">
+            Send Request!
+        </button>
+
+    </div>
+
+    </div>
+
+    <div id=output class=""></div>
+
+
+    <br><br>
+
+    </div>
+
+
+    </body>
+{% endblock content %}
+</html>

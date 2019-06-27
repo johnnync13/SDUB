@@ -1,0 +1,14 @@
+utils/CmdClient$1.class
+utils/CmdServer$1.class
+utils/Deck.class
+utils/ComUtils.class
+utils/CmdClient.class
+utils/ComUtilsService.class
+utils/CmdServer.class
+utils/LogicaPartida$1.class
+utils/DetectErrors.class
+Server.class
+utils/LogicaPartida.class
+PartidaServer.class
+utils/Cards.class
+utils/ComUtils$Endianness.class

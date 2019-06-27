@@ -1,0 +1,206 @@
+[
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 1,
+    "fields": {
+      "restaurant_number": "09186777",
+      "name": "Only Tapas",
+      "menu_description": "TAPAS",
+      "price_average": "30",
+      "is_promot": "False",
+      "rate": "10",
+      "category": "Medi",
+      "city": "Barcelona",
+      "address": "Les Rambles, 33",
+      "country": "Spain",
+      "capacity": 40
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 2,
+    "fields": {
+      "restaurant_number": "09186666",
+      "name": "Only Pinxos",
+      "menu_description": "PINXOS",
+      "price_average": "130.33",
+      "is_promot": "True",
+      "rate": "9.6",
+      "category": "Basq",
+      "city": "Barcelona",
+      "address": "Gran Via de les Corts Catalanes, 495",
+      "country": "Spain",
+      "capacity": 240
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 3,
+    "fields": {
+      "restaurant_number": "067547",
+      "name": "Canareva",
+      "menu_description": "Tapas",
+      "price_average": "100.33",
+      "is_promot": "True",
+      "rate": "9.8",
+      "category": "Basq",
+      "city": "Valencia",
+      "address": "Avenida del Canal, 30",
+      "country": "Spain",
+      "capacity": 100
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 4,
+    "fields": {
+      "restaurant_number": "355335",
+      "name": "Verin",
+      "menu_description": "Tapas",
+      "price_average": "150.22",
+      "is_promot": "True",
+      "rate": "9.9",
+      "category": "Basq",
+      "city": "Madrid",
+      "address": "Calle Ciutat de Consuegra,5",
+      "country": "Spain",
+      "capacity": 100
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 5,
+    "fields": {
+      "restaurant_number": "045346",
+      "name": "Taperia XL",
+      "menu_description": "Bocadillos",
+      "price_average": "90",
+      "is_promot": "True",
+      "rate": "7.4",
+      "category": "Basq",
+      "city": "Valencia",
+      "address": "Avinguda del Remolar, 72",
+      "country": "Spain",
+      "capacity": 30
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 6,
+    "fields": {
+      "restaurant_number": "65463862",
+      "name": "Flax & Kale",
+      "menu_description": "Dishes",
+      "price_average": "100.33",
+      "is_promot": "True",
+      "rate": "9.6",
+      "category": "Vegy",
+      "city": "Barcelona",
+      "address": "Carrer de Tallers, 495",
+      "country": "Spain",
+      "capacity": 300
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 7,
+    "fields": {
+      "restaurant_number": "453667",
+      "name": "100 montaditos",
+      "menu_description": "TAPAS",
+      "price_average": "50",
+      "is_promot": "True",
+      "rate": "9.0",
+      "category": "Medi",
+      "city": "Barcelona",
+      "address": "Rambla de Catalunya, 11",
+      "country": "Spain",
+      "capacity": 120
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 8,
+    "fields": {
+      "restaurant_number": "52667653",
+      "name": "Bacoa",
+      "menu_description": "Burguers",
+      "price_average": "20",
+      "is_promot": "True",
+      "rate": "10",
+      "category": "BBQ",
+      "city": "Valencia",
+      "address": "Ronda de la universitat, 31",
+      "country": "Spain",
+      "capacity": 50
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 9,
+    "fields": {
+      "restaurant_number": "48644356",
+      "name": "Centfocs",
+      "menu_description": "Dishes",
+      "price_average": "50",
+      "is_promot": "False",
+      "rate": "9.1",
+      "category": "Medi",
+      "city": "Barcelona",
+      "address": "Carrer de Balmes, 16",
+      "country": "Spain",
+      "capacity": 300
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 10,
+    "fields": {
+      "restaurant_number": "2662526",
+      "name": "Più",
+      "menu_description": "Pizzas",
+      "price_average": "20",
+      "is_promot": "True",
+      "rate": "8.4",
+      "category": "Ital",
+      "city": "Barcelona",
+      "address": "Gran Via de les Corts Catalanes, 633",
+      "country": "Spain",
+      "capacity": 250
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 11,
+    "fields": {
+      "restaurant_number": "74323487",
+      "name": "Goiko Grill",
+      "menu_description": "Burguers",
+      "price_average": "40",
+      "is_promot": "True",
+      "rate": "8",
+      "category": "BBQ",
+      "city": "Madrid",
+      "address": "Carrer d'Aribau, 113",
+      "country": "Spain",
+      "capacity": 170
+    }
+  },
+  {
+    "model": "forkilla.Restaurant",
+    "pk": 12,
+    "fields": {
+      "restaurant_number": "34587364",
+      "name": "Brunch & Cake",
+      "menu_description": "Dishes",
+      "price_average": "110",
+      "is_promot": "True",
+      "rate": "9",
+      "category": "Vegy",
+      "city": "Barcelona",
+      "address": "carrer d'Enric Granados, 19",
+      "country": "Spain",
+      "capacity": 150
+    }
+  }
+]

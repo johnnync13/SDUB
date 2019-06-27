@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <title>Restaurant</title>
+    <meta charset="utf-8"/>
+</head>
+{% extends 'forkilla/base.html' %}
+{% block content %}
+
+    {% if city %}
+        <p>{{ city }}</p>
+    {% endif %}
+
+    {% if category %}
+        {{ category }}
+        <li><a href="{% url 'index' %}forkilla">forkilla</a>/
+            <a href="{% url 'restaurants' city %}">{{ city }}</a>/<a
+                    href="{% url 'restaurants' city category %}">{{ category }}</a></li>
+    {% else %}
+        <li><a href="{% url 'index' %}forkilla">forkilla</a>/<a href="{% url 'restaurants' city %}">{{ city }}</a></li>
+    {% endif %}
+
+
+    {% if restaurants %}
+        {% if promoted %}
+            <h2>Promoted Restaurants</h2>
+        {% endif %}
+
+        {% if request.user.is_authenticated %}
+
+            <form action="{% url 'reservation' %}" method="get">
+
+                <div class="row">
+                    {% for restaurant,image in restaurants1 %}
+                        <div class="col-md-4 mb-5">
+
+                            <div class="card h-100">
+                                {% load static %}
+                                <img class="card-img-top" src={% static image %} alt="">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ restaurant.name }}</h4>
+                                    <p class="card-text"
+                                       href="{% url 'restaurants' restaurant.category %}">{{ restaurant.get_human_category }}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{% url 'detail' restaurant.restaurant_number %}" class="btn
+                                        btn-primary">Find Out More!</a>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </form>
+
+        {% else %}
+            <div class="row">
+                {% for restaurant,image in restaurants1 %}
+                    <div class="col-md-4 mb-5">
+
+                        <div class="card h-100">
+                            {% load static %}
+                            <img class="card-img-top" src={% static image %} alt="">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ restaurant.name }}</h4>
+                                <p class="card-text"
+                                   href="{% url 'restaurants' restaurant.category %}">{{ restaurant.get_human_category }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{% url 'login' %}" class="btn
+                                        btn-primary">Find Out More!</a>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                {% endfor %}
+            </div>
+
+            </form>
+        {% endif %}
+
+    {% else %}
+        <p>No restaurants are available.</p>
+    {% endif %}
+{% endblock %}
+
+
+</html>
