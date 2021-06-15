@@ -1,9 +1,9 @@
-Django==1.11.12
-django-cors-headers==2.0.2
-django-filter==0.13.0
-djangorestframework==3.6.2
+Django==2.2.18
+django-cors-headers==3.0.0
+django-filter==2.4.0
+djangorestframework==3.11.2
 django-heroku==0.3.1
-Pillow==3.1.1
-gunicorn==19.7
+Pillow==8.1.0
+gunicorn==19.10.0
 whitenoise==3.3.1
 psycopg2==2.8.2
